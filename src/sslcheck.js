@@ -33,7 +33,7 @@ function sslcheck() {
 
         // Cria um novo arquivo para rodar o script sslCheck
         fs.writeFile(
-          "sslcheck_inline.txt",
+          "filename.txt",
           "remover" + filter + "\n",
           { enconding: "utf-8", flag: "a" },
           function (err) {

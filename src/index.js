@@ -3,7 +3,7 @@ const csv = require("fast-csv");
 
 // funcao substitui urls http por https e gera querys UPDATES
 function verifyCsv() {
-  const read = fs.createReadStream("updateFiltrado.csv");
+  const read = fs.createReadStream("filename.csv");
 
   const readedCsv = csv
     .parse({
@@ -24,7 +24,7 @@ function verifyCsv() {
       if (data.Url.includes("http")) {
         console.log(replaced, "Adicionando as urls https");
         fs.writeFile(
-          "updateUrls_status_c.txt",
+          "filename.txt",
           "UPDATE Baixaki.dbo.Programas_Urls" +
             " " +
             "SET" +
@@ -48,19 +48,10 @@ function verifyCsv() {
             if (err) return console.error(err);
           }
         );
-        // return fs.writeFile(
-        //   "Programas_urls_dominio_combr.csv",
-        //   replaced + "\n",
-        //   { enconding: "utf-8", flag: "a" },
-        //   function (err) {
-        //     console.log(replaced);
-        //     if (err) return console.error(err);
-        //   }
-        // );
       }
     })
     .on("end", (replaced) => {
-      console.log(replaced, ">>>> A operação de replace terminou <<<<");
+      console.log(replaced, ">>>> A operação replace terminou <<<<");
     });
 
   read.pipe(readedCsv);
